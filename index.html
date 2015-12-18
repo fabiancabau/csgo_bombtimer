@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 	<head>
 
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/qrcode.min.js"></script>
+		<script>
+		  var socket = io.connect('http://localhost:3000');
+		  socket.on('connected', function (data) {
+		    
+		  });
+
+		  socket.on('gen-code', function (data) {
+		  	new QRCode(document.getElementById('qrcode'), data.code.toString());
+		  	document.getElementById('textcode').innerHTML = data.code;
+		  });
+		</script>
 		
 	</head>
 
 	<body>
 
-	Serving...
+	<div id="textcode">Generating code...</div>
+	<br>
+	<div id="qrcode"></div>
 
 	</body>
 
