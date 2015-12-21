@@ -3,10 +3,12 @@ var express = require('express'),
 
 router.route('/match')
 
-	//create a bear
 	.post(function(req, res) {
+		console.log('request received', req.body);
         if (req.body.round.bomb == 'planted') {
-            res.json({message: 'Bomb has been planted'});
+        	req.io.sockets.emit('bomb-status', {message: 'Bomb has been planted!'});
+        	console.log('bomb has been planted');
+            res.json({message: 'Bomb has been planted', status: 'planted'});
         }		
 	});
 

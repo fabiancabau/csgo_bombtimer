@@ -5,13 +5,19 @@
 		<script src="/qrcode.min.js"></script>
 		<script>
 		  var socket = io.connect('http://localhost:3000');
-		  socket.on('connected', function (data) {
-		    
+		  socket.on('connect', function (data) {
+		    socket.emit('request-code', {});
 		  });
 
 		  socket.on('gen-code', function (data) {
+		  	document.getElementById('qrcode').innerHTML = '';
 		  	new QRCode(document.getElementById('qrcode'), data.code.toString());
 		  	document.getElementById('textcode').innerHTML = data.code;
+		  	document.getElementById('download').href = '/download?token='+data.code;
+		  });
+
+		  socket.on('bomb-status', function (data) {
+		  	document.getElementById('bomb-status').innerHTML = data.message;
 		  });
 		</script>
 		
@@ -22,7 +28,9 @@
 	<div id="textcode">Generating code...</div>
 	<br>
 	<div id="qrcode"></div>
-
+	<div id="bomb-status"></div>
+	<br>
+	<a id="download" href="#">Download your cfg</a>
 	</body>
 
 </html>

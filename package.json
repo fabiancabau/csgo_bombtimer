@@ -9,9 +9,6 @@
   "dependencies": {
     "body-parser": "^1.13.1",
     "express": "^4.13.0",
-    "jsonwebtoken": "^5.0.2",
-    "mongoose": "^4.0.6",
-    "morgan": "^1.6.0",
     "request": "~2.54.0"
   },
   "author": "",
